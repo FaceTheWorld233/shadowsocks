@@ -1,1 +1,60 @@
-由于碰撞到了审计规则，您的连接已经被阻断。 
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+		<title>请注意</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+		<meta name="keywords" content="" />
+		<meta http-equiv="Access-Control-Allow-Origin" content="*">
+		<link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+		<link href="http://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900" rel="stylesheet">
+
+	</head>
+
+	<body>
+
+		<div class="error_main">
+			<div class="content">
+				<h1>请停止访问被禁止的内容</h1>
+					<div class="error_content">
+						<span class="fa fa-frown-o"></span>
+						<h2>请不要使用本服务用于非法或被禁用的访问行为</h2>
+						<p>请查看用户中心的公告，我们已经封锁针对政治/BT下载/360服务/定位等用户行为，请您也遵守国家法律进行网络浏览。</p>
+						<p>你本次违规已经记录，如果次数过多会导致帐号被封禁！！！请珍惜你的帐号。</p>
+						<p style="font-weight: 900;margin-top: 2em;display: block;text-align: -webkit-center;">还剩 <span id="Countdown">10</span> 秒跳转至FaceTheWorld</p>
+						<a class="b-home" href="https://ftw.b69o.top/" target="_blank" href="#">访问我们的网站</a>
+					</div>
+			</div>
+		</div>
+
+	</body>
+
+	<script language="javascript" type="text/javascript"> 
+		var second = document.getElementById('Countdown').textContent; 
+		
+		if (navigator.appName.indexOf("Explorer") > -1)  { 
+			second = document.getElementById('Countdown').innerText; 
+		} else { 
+			second = document.getElementById('Countdown').textContent; 
+		} 
+		
+		setInterval("redirect()", 1000); 
+		
+		function redirect() { 
+
+			if (second < 0) { 
+				location.href = 'https://ftw.b69o.top/'; 
+			} else { 
+				if (navigator.appName.indexOf("Explorer") > -1) { 
+					document.getElementById('Countdown').innerText = second--; 
+				} else { 
+					document.getElementById('Countdown').textContent = second--; 
+				} 
+			}
+
+		}
+	</script>
+
+</html>
