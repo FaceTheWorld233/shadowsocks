@@ -338,12 +338,8 @@ class DbTransfer(object):
         conn.autocommit(True)
 
         cur = conn.cursor()
-        if get_config().MYSQL_OFFSET == 0:
-            cur.execute("SELECT `node_group`,`node_class`,`node_speedlimit`,`traffic_rate`,`mu_only`,`sort`,`port_offset` FROM ss_node where `id`='" +
-                        str(get_config().NODE_ID) + "' AND (`node_bandwidth`<`node_bandwidth_limit` OR `node_bandwidth_limit`=0)")
-        elif get_config().MYSQL_OFFSET != 0:
-            cur.execute("SELECT `node_group`,`node_class`,`node_speedlimit`,`traffic_rate`,`mu_only`,`sort` FROM ss_node where `id`='" +
-                        str(get_config().NODE_ID) + "' AND (`node_bandwidth`<`node_bandwidth_limit` OR `node_bandwidth_limit`=0)")
+        cur.execute("SELECT `node_group`,`node_class`,`node_speedlimit`,`traffic_rate`,`mu_only`,`sort`,`port_offset`,'set_back_port' FROM ss_node where `id`='" +
+                    str(get_config().NODE_ID) + "' AND (`node_bandwidth`<`node_bandwidth_limit` OR `node_bandwidth_limit`=0)")
         nodeinfo = cur.fetchone()
 
         if nodeinfo is None:
@@ -379,14 +375,16 @@ class DbTransfer(object):
                     node_group_sql +
                     ") OR `is_admin`=1) AND`enable`=1 AND `expire_in`>now() AND `transfer_enable`>`u`+`d`")
         rows = []
-        if get_config().MYSQL_OFFSET == 0:
-            offset = int(nodeinfo[6])
+        offset = int(nodeinfo[6])
+        set_port = int(nodeinfo[7])
         for r in cur.fetchall():
             d = {}
             for column in range(len(keys)):
                 d[keys[column]] = r[column]
                 if get_config().MYSQL_OFFSET == 0:
                     d['port'] = r[1] + offset
+                elif set_port != 0:
+                    d['port'] = set_port
             rows.append(d)
         cur.close()
 
