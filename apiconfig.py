@@ -27,6 +27,9 @@ MYSQL_USER = 'ss'
 MYSQL_PASS = 'ss'
 MYSQL_DB = 'shadowsocks'
 
+# 后端手动偏移
+MYSQL_OFFSET = 0
+
 MYSQL_SSL_ENABLE = 0
 MYSQL_SSL_CA = ''
 MYSQL_SSL_CERT = ''
