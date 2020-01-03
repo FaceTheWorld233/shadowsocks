@@ -383,7 +383,7 @@ class DbTransfer(object):
                 d[keys[column]] = r[column]
                 if set_back_port != 0:
                     d['port'] = set_back_port
-                elif get_config().MYSQL_OFFSET == 0:
+                else:
                     d['port'] = r[1] + offset
             rows.append(d)
         cur.close()
@@ -523,11 +523,7 @@ class DbTransfer(object):
 
         for row in rows:            
             if row['is_multi_user'] != 0:
-                if get_config().MYSQL_OFFSET == 0:
-                    self.mu_port_list.append(int(row['port']))
-                elif get_config().MYSQL_OFFSET != 0:
-                    #端口偏移
-                    row['port'] = row['port']+get_config().MYSQL_OFFSET
+                self.mu_port_list.append(int(row['port']))
                 continue
 
             md5_users[row['id']] = row.copy()
