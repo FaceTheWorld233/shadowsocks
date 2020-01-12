@@ -1,4 +1,4 @@
-﻿#!/usr/bin/python
+#!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
 import logging
@@ -216,7 +216,7 @@ class WebTransfer(object):
         self.traffic_rate = nodeinfo['traffic_rate']
 
         self.mu_only = nodeinfo['mu_only']
-	    self.port_offset = int(nodeinfo['port_offset'])
+        self.port_offset = int(nodeinfo['port_offset'])
 
         if nodeinfo['sort'] == 10:
             self.is_relay = True
