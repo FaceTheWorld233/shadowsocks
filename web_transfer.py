@@ -613,7 +613,10 @@ class WebTransfer(object):
                 'obfs',
                 'plain'))
         if self.mu_only == 1:
-            new_port = port + self.port_offset
+			if get_config().MYSQL_OFFSET != 0:
+				new_port = port + get_config().MYSQL_OFFSET
+			else:
+				new_port = port + self.port_offset
         else:
             new_port = port
         logging.info(
