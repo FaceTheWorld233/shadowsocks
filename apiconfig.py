@@ -1,4 +1,4 @@
-# Config
+﻿# Config
 NODE_ID = 0
 
 
