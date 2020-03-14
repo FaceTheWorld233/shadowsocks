@@ -216,7 +216,6 @@ class WebTransfer(object):
         self.traffic_rate = nodeinfo['traffic_rate']
 
         self.mu_only = nodeinfo['mu_only']
-        self.port_offset = int(nodeinfo['port_offset'])
 
         if nodeinfo['sort'] == 10:
             self.is_relay = True
@@ -596,7 +595,6 @@ class WebTransfer(object):
                     mu_user_port].reset_single_multi_user_traffic(self.port_uid_table[port])
 
     def new_server(self, port, passwd, cfg):
-        self.pull_db_all_user()
         protocol = cfg.get(
             'protocol',
             ServerPool.get_instance().config.get(
@@ -612,17 +610,10 @@ class WebTransfer(object):
             ServerPool.get_instance().config.get(
                 'obfs',
                 'plain'))
-        if self.mu_only == 1:
-			if get_config().MYSQL_OFFSET != 0:
-				new_port = port + get_config().MYSQL_OFFSET
-			else:
-				new_port = port + self.port_offset
-        else:
-            new_port = port
         logging.info(
             'db start server at port [%s] pass [%s] protocol [%s] method [%s] obfs [%s]' %
-            (new_port, passwd, protocol, method, obfs))
-        ServerPool.get_instance().new_server(new_port, cfg)
+            (port, passwd, protocol, method, obfs))
+        ServerPool.get_instance().new_server(port, cfg)
 
     @staticmethod
     def del_servers():
